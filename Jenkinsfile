@@ -5,53 +5,53 @@ pipeline {
         }
                 stages {
                         stage('Test Env') {
-								agent {label 'AWSTest'}
-								when {
-										expression { params.ReleaseOnTest == true }
+				agent {label 'AWSTest'}
+				when {
+					expression { params.ReleaseOnTest == true }
                                 }
                                 steps {
-										echo 'Building Test Images'
+					echo 'Building Test Images'
 								
-                                        sh tutor images build openedx --build-arg EDX_PLATFORM_REPOSITORY=https://pratian-technologies:al2srxuk7dk7hyjmwwaupv6lgke7g76je643xotazhnwrgs46xda@dev.azure.com/pratian-technologies/PratianLearningCloud/_git/PratianLearningCloud --build-arg EDX_PLATFORM_VERSION=TestLMS
+                                        sh "tutor images build openedx --build-arg EDX_PLATFORM_REPOSITORY=https://pratian-technologies:al2srxuk7dk7hyjmwwaupv6lgke7g76je643xotazhnwrgs46xda@dev.azure.com/pratian-technologies/PratianLearningCloud/_git/PratianLearningCloud --build-arg EDX_PLATFORM_VERSION=TestLMS"
                                         
-										echo 'Images build successful'
+					echo 'Images build successful'
 										
-										echo 'stopping current running containers'
+					echo 'stopping current running containers'
 										
-										sh tutor local stop
+					sh "tutor local stop"
 										
-										echo 'containers are stopped'
+					echo 'containers are stopped'
 										
-										echo 'running new containers'
+					echo 'running new containers'
 										
-										sh tutor local start --detach
+					sh "tutor local start --detach"
 										
-										echo 'containers are up and running'
-								}                      
+					echo 'containers are up and running'
+				}                      
                         }
                         stage('Production Env'){
-                                    agent {label 'AwsProd'}
-                                    when {
+                                agent {label 'AwsProd'}
+                                when {
                                            expression { params.ReleaseOnProd == true }
-                                    }
+                                }
                                 steps {
                                         echo 'Building prod images '
                                         
-										sh tutor images build openedx --no-cache --build-arg EDX_PLATFORM_REPOSITORY=https://pratian-technologies:al2srxuk7dk7hyjmwwaupv6lgke7g76je643xotazhnwrgs46xda@dev.azure.com/pratian-technologies/PratianLearningCloud/_git/PratianLearningCloud --build-arg EDX_PLATFORM_VERSION=prod_branch_15_04_2020
+				        sh "tutor images build openedx --no-cache --build-arg EDX_PLATFORM_REPOSITORY=https://pratian-technologies:al2srxuk7dk7hyjmwwaupv6lgke7g76je643xotazhnwrgs46xda@dev.azure.com/pratian-technologies/PratianLearningCloud/_git/PratianLearningCloud --build-arg EDX_PLATFORM_VERSION=prod_branch_15_04_2020"
                                         
-										echo 'Images build successful'
+					echo 'Images build successful'
 										
-										echo 'stopping current running containers'
+					echo 'stopping current running containers'
 										
-										sh tutor local stop
+					sh "tutor local stop"
 										
-										echo 'containers are stopped'
+					echo 'containers are stopped'
 										
-										echo 'running new containers'
+					echo 'running new containers'
 										
-										sh tutor local start --detach
+					sh "tutor local start --detach"
 										
-										echo 'containers are up and running'
+				        echo 'containers are up and running'
                                 }
                         }
                 }
