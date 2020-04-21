@@ -1,4 +1,5 @@
 pipeline {
+	agent {label 'AWSTest'}
         parameters  {
                 booleanParam(name: 'ReleaseOnProd', defaultValue: false, description: 'will run images on Prod Server')
                 booleanParam(name: 'ReleaseOnTest', defaultValue: false, description: 'Will run images on Test Server') 
