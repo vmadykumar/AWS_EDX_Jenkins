@@ -13,7 +13,7 @@ pipeline {
                                 steps {
 					echo 'Building Test Images'
 								
-                                        sh "tutor images build openedx --build-arg EDX_PLATFORM_REPOSITORY=https://pratian-technologies:al2srxuk7dk7hyjmwwaupv6lgke7g76je643xotazhnwrgs46xda@dev.azure.com/pratian-technologies/PratianLearningCloud/_git/PratianLearningCloud --build-arg EDX_PLATFORM_VERSION=Amadeus-Prod"
+                                        sh "tutor images build openedx --build-arg EDX_PLATFORM_REPOSITORY=https://pratian-technologies:al2srxuk7dk7hyjmwwaupv6lgke7g76je643xotazhnwrgs46xda@dev.azure.com/pratian-technologies/PratianLearningCloud/_git/PratianLearningCloud --build-arg EDX_PLATFORM_VERSION=TestLMS"
                                         
 					echo 'Images build successful'
 										
@@ -38,7 +38,7 @@ pipeline {
                                 steps {
                                         echo 'Building prod images '
                                         
-				        sh "tutor images build openedx --no-cache --build-arg EDX_PLATFORM_REPOSITORY=https://pratian-technologies:al2srxuk7dk7hyjmwwaupv6lgke7g76je643xotazhnwrgs46xda@dev.azure.com/pratian-technologies/PratianLearningCloud/_git/PratianLearningCloud --build-arg EDX_PLATFORM_VERSION=prod_branch_15_04_2020"
+				        sh "tutor images build openedx --no-cache --build-arg EDX_PLATFORM_REPOSITORY=https://pratian-technologies:al2srxuk7dk7hyjmwwaupv6lgke7g76je643xotazhnwrgs46xda@dev.azure.com/pratian-technologies/PratianLearningCloud/_git/PratianLearningCloud --build-arg EDX_PLATFORM_VERSION=Amadeus-Prod"
                                         
 					echo 'Images build successful'
 										
